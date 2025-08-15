@@ -1,0 +1,28 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/auth_db}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+management:
+  endpoints.web.exposure.include: health,info,metrics,env
+  endpoint.health.show-details: always
+
+auth:
+  mode: ${AUTH_MODE:jwt}
+jwt:
+  secret: ${JWT_SECRET:dev-secret}
+  expMinutes: ${JWT_EXP_MIN:60}
+
+keycloak:
+  issuer: ${KEYCLOAK_ISSUER:http://keycloak:8080/realms/dev}

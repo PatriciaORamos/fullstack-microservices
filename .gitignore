@@ -1,0 +1,10 @@
+target
+node_modules
+.DS_Store
+.idea
+*.iml
+.env
+dist
+**/application-*.yml
+**/application-*.yaml
+**/.DS_Store

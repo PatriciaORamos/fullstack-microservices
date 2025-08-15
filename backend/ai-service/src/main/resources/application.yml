@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT:8084}
+
+spring:
+  application:
+    name: ai-service
+
+management:
+  endpoints.web.exposure.include: health,info
+
+ai:
+  provider: ${AI_PROVIDER:openai}
+  model: ${AI_MODEL:gpt-4o-mini}
+  api:
+    base: ${AI_API_BASE:https://api.openai.com/v1}
+    key: ${AI_API_KEY:changeme}
