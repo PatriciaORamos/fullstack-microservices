@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS payments (id UUID PRIMARY KEY, order_id UUID, amount NUMERIC(12,2), method VARCHAR(64), status VARCHAR(32), created_at TIMESTAMP DEFAULT NOW());

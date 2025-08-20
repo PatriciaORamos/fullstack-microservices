@@ -1,0 +1,46 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: order-service
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5434/orders_db}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9093}
+    consumer:
+      group-id: ${SPRING_KAFKA_CONSUMER_GROUP:order-service}
+      auto-offset-reset: earliest
+    producer:
+      acks: all
+    properties:
+      spring.json.trusted.packages: "*"
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      timeout: 3000
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 10m
+      cache-null-values: false
+
+management:
+  endpoints.web.exposure.include: health,info,metrics,env
+  endpoint.health.show-details: always
+
+app:
+  topics:
+    order: ${ORDER_TOPIC:order.events}
+    payment: ${PAYMENT_TOPIC:payment.events}
